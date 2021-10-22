@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 export function Timer() {
-  const [segundos, setSegundos] = useState(0);
+  const [segundos, setSegundos] = useState(5);
   const [timer, setTimer] = useState();
   const [disabledButtonInferior, setDisabledButtonInferior] = useState(true);
   const [pausado, setPausado] = useState(false);
@@ -18,6 +18,8 @@ export function Timer() {
     console.log('segundos :', segundos);
     if (segundos === 0) {
       clearInterval(timer);
+      setSegundos(5);
+      setDisabledButtonInferior(true);
     }
   }, [segundos, timer]);
   
@@ -38,6 +40,7 @@ export function Timer() {
   };
 
   const pausar = () => {
+    setDisabledButtonInferior(true);
     setPausado(true);
     clearInterval(timer);
   }
@@ -49,8 +52,7 @@ export function Timer() {
   }
 
   const iniciar = () => {
-    if (pausado)
-      start();
+    start();
   }
 
   return (
@@ -75,9 +77,8 @@ export function Timer() {
               {segundos}
             </div>
             {disabledButtonInferior
-              ? null
+              ? <button onClick={iniciar}>Iniciar</button>
               : <div className="buttons">
-                  <button onClick={iniciar}>Iniciar</button>
                   <button onClick={pausar}>Pausar</button>
                   <button onClick={parar}>Parar</button>
                 </div>
