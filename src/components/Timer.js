@@ -4,7 +4,6 @@ export default function Timer() {
   const [segundos, setSegundos] = useState(5);
   const [timer, setTimer] = useState();
   const [disabledButtonInferior, setDisabledButtonInferior] = useState(true);
-  const [pausado, setPausado] = useState(false);
   
   const start = () => {
     setDisabledButtonInferior(false);
@@ -44,7 +43,6 @@ export default function Timer() {
 
   const pausar = () => {
     setDisabledButtonInferior(true);
-    setPausado(true);
     clearInterval(timer);
   }
 
