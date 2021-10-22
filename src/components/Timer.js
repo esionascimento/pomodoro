@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-export function Timer() {
+export default function Timer() {
   const [segundos, setSegundos] = useState(5);
   const [timer, setTimer] = useState();
   const [disabledButtonInferior, setDisabledButtonInferior] = useState(true);
@@ -60,39 +60,24 @@ export function Timer() {
 
   return (
     <div className="body-app">
-      <header className="header">
-        <ul>
-          <li>Login</li>
-        </ul>
-      </header>
-      <div className="box-on">
-        <div className="box-in">
-          <div className="div-esquerda">
-            <p>Configurações</p>
-          </div>
-          <div className="div-direita">
-            <div>
-              <button name="5" onClick={startTempo}>5 Min</button>
-              <button name="10" onClick={startTempo}>10 Min</button>
-              <button name="15" onClick={startTempo}>15 Min</button>
-            </div>
-            <div>
-              {segundos}
-            </div>
-            {disabledButtonInferior
-              ? <button onClick={iniciar}>Iniciar</button>
-              : <div className="buttons">
-                  <button onClick={pausar}>Pausar</button>
-                  <button onClick={parar}>Parar</button>
-                </div>
-            }
-            
-          </div>
+      <div className="div-direita">
+        <div>
+          <button name="5" onClick={startTempo}>5 Min</button>
+          <button name="10" onClick={startTempo}>10 Min</button>
+          <button name="15" onClick={startTempo}>15 Min</button>
         </div>
+        <div>
+          {segundos}
+        </div>
+        {disabledButtonInferior
+          ? <button onClick={iniciar}>Iniciar</button>
+          : <div className="buttons">
+              <button onClick={pausar}>Pausar</button>
+              <button onClick={parar}>Parar</button>
+            </div>
+        }
+        
       </div>
-      <footer className="rodape">
-        rodape
-      </footer>
     </div>
   );
 }
