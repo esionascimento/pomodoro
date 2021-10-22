@@ -1,58 +1,21 @@
-import { useEffect, useRef, useState } from 'react';
-
-import './Timer.css';
+import React, { useEffect, useState } from "react";
 
 export function Timer() {
-  const [timerDias, setTimerDias] = useState('00');
-  const [timerHoras, setTimerHoras] = useState('00');
-  const [timerMinutos, setTimerMinutos] = useState('00');
-  const [timerSegundos, setTimerSegundos] = useState('00');
+  const [segundos, setSegundos] = useState(1);
+  const [timer, setTimer] = useState();
 
-  let intervalo = useRef();
+  const start = () => {
+    const intervalTimer = setInterval(() => {
+      setSegundos((segundos) => segundos - 1);
+    }, 1000);
+    setTimer(intervalTimer);
+  };
 
-  
-
-  useEffect(() => {
-    console.log('useEffect value :', time);
-    const timeInterval = setInterval(() => {
-      setTime((oldState) => oldState.time - 1)
-    }, 10000);
-    return () => {
-      clearInterval(timeInterval);
-    };
-  }, [time])
-
-  const handleStart = (value) => {
-    console.log('handleStart value :', value);
-    setTime({ time: value })
-  }
-
-  /* const handleStart = () => {
-    setInterval(() => {
-      setTime((oldState) => {
-        return oldState - 1
-      })
-    }, 1000)
-    return () => {
-      clearInterval(handleStart)
+  useEffect(() => { // segundos === 0 desmonta o setInterval
+    if (segundos === 0) {
+      clearInterval(timer);
     }
-  }; */
-
-  /* function stopCrono() {
-    clearInterval(handleStart);
-  } */
-
-  const onClick = (value) => {
-    console.log('onClick value :', value);
-    console.log('time :', time);
-    setTime({ time: value });
-
-    handleStart(value);
-  }
-
-  useEffect(() => {
-    clearInterval();
-  });
+  }, [segundos, timer]);
 
   return (
     <div className="body-app">
@@ -65,20 +28,20 @@ export function Timer() {
         <div className="box-in">
           <div className="div-esquerda">
             <p>Configurações</p>
+            {segundos}
           </div>
           <div className="div-direita">
             <div>
-              <button onClick={() => onClick(5)}>5 Min</button>
-              <button onClick={() => onClick(10)}>10 Min</button>
-              <button onClick={() => onClick(15)}>15 Min</button>
+              <button>5 Min</button>
+              <button>10 Min</button>
+              <button>15 Min</button>
             </div>
             <div>
-              {time}
             </div>
             <div className="buttons">
-              <button onClick={() => handleStart}>Iniciar</button>
+              <button onClick={start}>Iniciar</button>
               <button>Pausar</button>
-              {/* <button onClick={stopCrono}>Reiniciar</button> */}
+              <button>Reiniciar</button>
             </div>
           </div>
         </div>

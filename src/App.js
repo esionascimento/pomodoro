@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Timer } from './components/Timer';
+import { Timer } from './components/Timer.js';
 import './App.css';
 
 export class App extends Component {
