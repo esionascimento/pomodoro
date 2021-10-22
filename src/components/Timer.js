@@ -25,13 +25,16 @@ export function Timer() {
   
   const startTempo = (event) => {
     switch(event.target.name) {
-      case '5': setSegundos(5);
+      case '5': clearInterval(timer);
+                setSegundos(5);
                 start();
                 break;
-      case '10': setSegundos(10);
+      case '10': clearInterval(timer);
+                  setSegundos(10);
                   start();
                   break;
-      case '15': setSegundos(15);
+      case '15': clearInterval(timer);
+                  setSegundos(15);
                   start();
                   break;
       default:
