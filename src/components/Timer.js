@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 
+import './Timer.css';
+
 export default function Timer() {
-  const [segundos, setSegundos] = useState(5);
+  const [segundos, setSegundos] = useState(25);
   const [timer, setTimer] = useState();
   const [disabledButtonInferior, setDisabledButtonInferior] = useState(true);
+  const [chave, setChave] = useState(true);
   
   const start = () => {
     setDisabledButtonInferior(false);
@@ -17,10 +20,17 @@ export default function Timer() {
     console.log('segundos :', segundos);
     if (segundos === 0) {
       clearInterval(timer);
-      setSegundos(5);
+      if (chave) {
+        setSegundos(5);
+        setChave(false);
+      } else {
+        setSegundos(25);
+        setChave(true);
+      }
+      start();
       setDisabledButtonInferior(true);
     }
-  }, [segundos, timer]);
+  }, [segundos, timer, chave]);
   
   const startTempo = (event) => {
     switch(event.target.name) {
@@ -58,14 +68,19 @@ export default function Timer() {
 
   return (
     <div className="body-app">
-      <div className="div-direita">
+      <div className="box">
         <div>
-          <button name="5" onClick={startTempo}>5 Min</button>
-          <button name="10" onClick={startTempo}>10 Min</button>
-          <button name="15" onClick={startTempo}>15 Min</button>
+          <button name="5" onClick={startTempo}>5 Seg</button>
+          <button name="10" onClick={startTempo}>10 Seg</button>
+          <button name="15" onClick={startTempo}>15 Seg</button>
         </div>
-        <div>
-          {segundos}
+        <div className="box-timer">
+          <div className="atividade">
+            {chave ? segundos : '25'}
+          </div>
+          <div className="intervalo">
+            {chave ? '5' : segundos}
+          </div>
         </div>
         {disabledButtonInferior
           ? <button onClick={iniciar}>Iniciar</button>
