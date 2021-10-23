@@ -1,6 +1,6 @@
 import React from "react";
 
-import Timer from '../components/Timer';
+import { Timer } from '../components/Timer';
 import './Pomodoro.css';
 
 export function Pomodoro() {
